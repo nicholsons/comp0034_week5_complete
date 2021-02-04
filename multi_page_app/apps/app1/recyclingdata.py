@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 
 
@@ -19,7 +21,9 @@ class RecyclingData:
         self.get_data()
 
     def get_data(self):
-        self.recycling = pd.read_csv('apps/app1/data/household_recycling.csv')
+        data_folder = Path('data')
+        csv_file = 'household_recycling.csv'
+        self.recycling = pd.read_csv(data_folder / csv_file)
         self.area_list = self.recycling["Area"].unique().tolist()
 
     def process_data_for_area(self, area):
