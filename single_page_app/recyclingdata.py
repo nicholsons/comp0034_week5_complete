@@ -24,6 +24,7 @@ class RecyclingData:
         data_folder = Path('data')
         csv_file = 'household_recycling.csv'
         self.recycling = pd.read_csv(data_folder / csv_file)
+        print(self.recycling)
         self.area_list = self.recycling["Area"].unique().tolist()
 
     def process_data_for_area(self, area):

@@ -5,7 +5,6 @@ import pandas as pd
 
 class RecyclingData:
     """Class for retrieving and structuring the data.
-    TODO: Add error handling for file read issues.
     TODO: Improve the efficiency of the stats calcs.
     """
 
@@ -21,10 +20,14 @@ class RecyclingData:
         self.get_data()
 
     def get_data(self):
-        data_folder = Path('data')
-        csv_file = 'household_recycling.csv'
-        self.recycling = pd.read_csv(data_folder / csv_file)
-        self.area_list = self.recycling["Area"].unique().tolist()
+        data_dir = Path('apps/apps1/data')
+        csv_file = Path.cwd() / data_dir / 'household_recycling.csv'
+        try:
+            self.recycling = pd.read_csv(csv_file)
+        except FileNotFoundError:
+            print('File not found: ', csv_file)
+        else:
+            self.area_list = self.recycling["Area"].unique().tolist()
 
     def process_data_for_area(self, area):
         # Data for England
