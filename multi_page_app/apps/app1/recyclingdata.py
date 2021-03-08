@@ -20,8 +20,7 @@ class RecyclingData:
         self.get_data()
 
     def get_data(self):
-        data_dir = Path('apps/apps1/data')
-        csv_file = Path.cwd() / data_dir / 'household_recycling.csv'
+        csv_file = Path(__file__).parent.joinpath('data').joinpath('household_recycling.csv')
         try:
             self.recycling = pd.read_csv(csv_file)
         except FileNotFoundError:
